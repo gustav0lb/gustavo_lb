@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void listaDecontatos();
+
+int main(){
+
+listaDecontatos();
+
+    return 0;
+}
+void listaDecontatos(){
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *arq = fopen("agenda.dat","r");
+    
+    if(!arq){
+        printf("Impossível abrir o arquivo!\n");
+    }
+    
+    while(!feof(arq)){
+    fscanf(arq,"%i %s %s %s",&id, nome, profissao, telefone);
+    printf("%s\n",nome);
+    }
+    
+    fclose(arq);
+}
