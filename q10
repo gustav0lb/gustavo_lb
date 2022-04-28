@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void ExportaContato(int indice);
+
+int main(){
+
+    int id;
+printf("Informe o ID do contato: ");
+scanf("%i",&id);
+
+ExportaContato(id);
+
+    return 0;
+}
+void ExportaContato(int indice){
+
+FILE *f = fopen("agenda2.dat", "w");
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *ff = fopen("agenda.dat", "r");
+    if(!ff){
+
+        printf("Impossivel abrir o arquivo!\n");
+    }
+
+    while(!feof(ff)){
+        fscanf(ff,"%i %s %s %s",&id, nome, profissao, telefone);
+
+        if(indice == id){
+        FILE *contato = fopen("aux.dat","w");
+        fprintf(contato,"%i %s %s %s",id, nome, profissao, telefone);
+        strcat(nome,".txt");
+
+            rename("aux.dat",nome);
+            fclose(contato);
+        }
+        else{
+            fprintf(f,"%i %s %s %s\n",id, nome, profissao, telefone);
+        }
+    }
+
+    fclose(f);
+    fclose(ff);
+
+    remove("agenda.dat");
+    rename("agenda2.dat","agenda.dat");
+}
