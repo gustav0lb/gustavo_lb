@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void ApagarOsContatos();
+
+int main(){
+
+ApagarOsContatos();
+
+    return 0;
+}
+void ApagarOsContatos(){
+
+    FILE *file1 = fopen("agendaAux.dat","w");
+
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *file2 = fopen("agenda.dat","r");
+
+    if(!file2){
+        printf("Impossivel abrir o arquivo!\n");
+    }
+/
+    fclose(file1);
+    fclose(file2);
+
+remove("agenda.dat");
+rename("agendaAux.dat","agenda.dat");
+}
