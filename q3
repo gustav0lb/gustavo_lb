@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void contato(char letra);
+
+int main(){
+
+char letra;
+printf("Digite a inicial do contato: ");
+scanf("%c",&letra);
+
+contato(letra);
+
+    return 0;
+}
+void contato(char letra){
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *file = fopen("agenda.dat","r");
+
+    if(!file){
+        printf("Erro, não é possivel abrir o arquivo\n");
+    }
+
+    while(!feof(file)){
+        fscanf(file,"%i %s %s %s",&id, nome, profissao,telefone);
+
+        if(nome[0] == letra) {
+            printf("%s - Telefone: %s\n",nome,telefone);
+
+        }
+    }
+}
