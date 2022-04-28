@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+void Fprofissao();
+
+int main(){
+
+Fprofissao();
+    return 0;
+}
+void Fprofissao(){
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *file = fopen("agenda.dat","r");
+
+    if(!file){
+        printf("Impossivel abrir o arquivo!\n");
+    }
+
+    while(!feof(file)){
+
+        fscanf(file,"%i %s %s %s ", &id, nome, profissao, telefone);
+        printf("%s\n",profissao);
+    }
+}
