@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+void contatoId(int indice);
+
+int main(){
+
+int indice;
+printf("Digite o id do contato: ");
+scanf("%i",&indice);
+
+contatoId(indice);
+
+    return 0;
+}
+void contatoId(int indice){
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+FILE *file = fopen("agenda.dat","r");
+
+if(!file){
+    printf("Impossivel abrir o arquivo\n");
+}
+
+while(!feof(file)){
+     fscanf(file,"%i %s %s %s", &id, nome, profissao, telefone);
+
+        if(id == indice){
+            printf("%i - %s - Profissão: %s contato: %s\n)",id, nome, profissao, telefone);
+        }
+}
+}
