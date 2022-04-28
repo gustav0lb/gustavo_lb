@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void Remover_Contato(int apagar);
+
+int main(){
+
+int id;
+printf("Informe o ID do contato para ser removido\n");
+scanf("%i",&id);
+
+Remover_Contato(id);
+
+    return 0;
+}
+void Remover_Contato(int apagar){
+  
+    FILE *arq1 = fopen("agendaAux.dat","w");
+
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *arq2 = fopen("agenda.dat","r");
+
+if(!arq2){
+    printf("Impossivel abrir o arquivo\n");
+}
+
+while(!feof(arq2)){
+    fscanf(arq2,"%i %s %s %s",&id, nome, profissao, telefone);
+
+    if(id != apagar){
+        fprintf(arq1,"%i %s %s %s\n",id, nome, profissao, telefone);
+    }
+}
+
+fclose(arq1);
+fclose(arq2);
+remove("agenda.dat");
+rename("agendaAux.dat","agenda.dat");
+}
