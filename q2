@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+void Contatos_Telef();
+
+int main(){
+
+Contatos_Telef();
+
+    return 0;
+}
+void Contatos_Telef(){
+    int id;
+    char nome[80];
+    char profissao[80];
+    char telefone[80];
+
+    FILE *file = fopen("agenda.dat", "r");
+
+    if(!file){
+        printf("Impossivel abrir o arquivo!\n");
+    }
+
+    while(!feof(file)){
+        fscanf(file,"%i %s %s %s",&id, nome, profissao, telefone);
+        printf("%s - Telefone (%s)\n",nome,telefone);
+    }
+}
